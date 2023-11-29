@@ -10,7 +10,7 @@ try {
         $password = $_POST["password"]; // Remember to hash this before comparing
         $encryptedPassword = md5($password); // This is a simple example, not secure enough for production
 
-        $user = Database::query("call sp_login('$username', '$encryptedPassword')");
+        $user = Database::query("CALL sp_login('$username', '$encryptedPassword')");
         if ($user) {
             http_response_code(200);
 

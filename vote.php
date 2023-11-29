@@ -9,11 +9,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 try {
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Handle form data
-        $option_id = $_POST["option_id"] = 6;
-        $poll_id = $_POST["poll_id"] = 1;
-        $user_id = $_SESSION['user_id'] = 14;
+        $option_id = $_POST["option_id"];
+        $poll_id = $_POST["poll_id"];
+        $user_id = $_SESSION['user_id'];
 
         // Check if the user has already voted (pseudo-code)
         $result = Database::query("CALL sp_has_user_voted('$user_id','$option_id','$poll_id')");
@@ -27,7 +27,7 @@ try {
             http_response_code(400);
             echo json_encode(["success" => false, "message" => "User has already voted."]);
         }
-    // }
+    }
 } catch (Exception $ex) {
     error_log($ex);
     http_response_code(500);
